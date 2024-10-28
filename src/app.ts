@@ -10,7 +10,7 @@ dotenv.config();
 
 // Inicializando o Firebase 
 firebaseAdmin.initializeApp({
-    credential: firebaseAdmin.credential.cert(process.env.FIREBASE_SECRET_KEY),
+    credential: firebaseAdmin.credential.cert(process.env.FIREBASE_SECRET_KEY!),
 });
 
 const port = process.env.PORT ?? '3000';
