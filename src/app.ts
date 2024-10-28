@@ -2,28 +2,35 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import firebaseAdmin from 'firebase-admin';
+import mongoose from 'mongoose';
 import registry from './core/provider-registry';
 import UserService from './infra/services/user.service';
 import userRoutes from './infra/routes/user.route';
 
 dotenv.config();
 
-// Inicializando o Firebase 
-firebaseAdmin.initializeApp({
-    credential: firebaseAdmin.credential.cert(process.env.FIREBASE_SECRET_KEY!),
-});
+mongoose.connect(process.env.MONGODB_URL)
+    .then(() => bootstrap())
+    .catch(error => console.log(error));
 
-const port = process.env.PORT ?? '3000';
+async function bootstrap() {
+    // Inicializando o Firebase 
+    firebaseAdmin.initializeApp({
+        credential: firebaseAdmin.credential.cert(process.env.FIREBASE_SECRET_KEY!),
+    });
 
-const app = express();
+    const port = process.env.PORT ?? '3000';
 
-// Injeção de Dependência
-registry.register(UserService.name, new UserService());
+    const app = express();
 
-// middlewares
-app.use(cors());
+    // Injeção de Dependência
+    registry.register(UserService.name, new UserService());
 
-// Registrar rotas
-app.use('/users', userRoutes);
+    // middlewares
+    app.use(cors());
 
-app.listen(port, () => console.log(`Servidor aberto em http://localhost:${port}`))
+    // Registrar rotas
+    app.use('/users', userRoutes);
+
+    app.listen(port, () => console.log(`Servidor aberto em http://localhost:${port}`));
+}
