@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { auth } from "firebase-admin"; 
+import { NextFunction, Request, Response } from "express";
+import { auth } from "firebase-admin";
 import { UserDetails } from "../types/user-details.type";
 
 async function firebaseAuthMiddleware(req: Request, res: Response, next: NextFunction) {
