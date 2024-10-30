@@ -13,7 +13,7 @@ async function firebaseAuthMiddleware(req: Request, res: Response, next: NextFun
 
     try {
         const { uid, email } = await verifyToken(token);
-        req.user = { uid, email } as UserDetails;
+        req['user'] = { uid, email } as UserDetails;
         next();
     } catch (error) {
         next(new Error(`Unauthorized: ${error.message}`));
