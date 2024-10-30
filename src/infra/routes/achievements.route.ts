@@ -94,8 +94,6 @@ routes.get('/', async (req: Request, res: Response) => {
     }
 });
 
-
-
 // Rota para buscar conquistas por ID do usuário
 routes.get('/user', async (req: Request, res: Response) => {
     try {
