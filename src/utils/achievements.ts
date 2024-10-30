@@ -1,5 +1,4 @@
-import achievementsModel from "./src/infra/models/achievements.model";
-import userAchievementsModel from './src/infra/models/user_achievements.model';
+import achievementsModel from "../infra/models/achievements.model";
 
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 3000;
@@ -62,11 +61,9 @@ const achievements = [
     }
 ];
 
-async function populateAchievements() {
+export async function populateAchievements() {
     try {
-        // Conta o número de documentos na collection
         const count = await achievementsModel.countDocuments({});
-        // Popula a collection apenas se estiver vazia
         if (count === 0) {
             await achievementsModel.insertMany(achievements);
             console.log("Dados populados com sucesso!");
@@ -76,39 +73,4 @@ async function populateAchievements() {
     } catch (err) {
         console.error("Erro ao popular a collection:", err);
     }
-}
-
-async function populateUserAchievements() {
-    try {
-        // Conta o número de documentos na collection
-        const count = await userAchievementsModel.countDocuments({});
-
-        // Popula a collection apenas se estiver vazia
-        if (count === 0) {
-            // Busca o achievement com o título "Grande Amigo"
-            const achievement = await achievementsModel.findOne({ title: "Grande Amigo" });
-
-            // Verifica se o achievement foi encontrado
-            if (achievement) {
-                // Cria um novo documento na collection userAchievements
-                await userAchievementsModel.create({
-                    userId: "xVcG3vhNs1azaNxgvkflxM7lHW32",
-                    achievementId: achievement._id // Usa _id para pegar o ID correto
-                });
-                console.log("Dados populados com sucesso!");
-            } else {
-                console.log("Achievement não encontrado.");
-            }
-        } else {
-            console.log("A collection user_achievements já possui dados.");
-        }
-    } catch (err) {
-        console.error("Erro ao popular a collection:", err);
-    }
-}
-
-
-export function populateDB() {
-    populateAchievements();
-    populateUserAchievements();
 }

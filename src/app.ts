@@ -4,7 +4,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import firebaseAdmin from 'firebase-admin';
 import mongoose from 'mongoose';
 import * as path from 'node:path';
-import { populateDB } from '../populate';
+import { populateDB } from './utils/populate';
 import registry from './core/provider-registry';
 import firebaseAuthMiddleware from './infra/middlewares/firebase-auth.middleware';
 import achievementRoutes from './infra/routes/achievements.route';
