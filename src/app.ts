@@ -7,7 +7,9 @@ import * as path from 'node:path';
 import registry from './core/provider-registry';
 import firebaseAuthMiddleware from './infra/middlewares/firebase-auth.middleware';
 import achievementRoutes from './infra/routes/achievements.route';
+import rankingRoutes from './infra/routes/ranking.route';
 import statisticsRoutes from './infra/routes/statistics.route';
+import userRoutes from './infra/routes/user.route';
 import UserService from './infra/services/user.service';
 import { populateDB } from './utils/populate';
 
@@ -41,6 +43,8 @@ async function bootstrap() {
     // Registrar rotas
     app.use('/achievements', achievementRoutes);
     app.use('/statistics', statisticsRoutes);
+    app.use('/ranking', rankingRoutes);
+    app.use('/user', userRoutes);
     
     // Global Exception Handler
     app.use((error: any, req: Request, res: Response, next: NextFunction) => {

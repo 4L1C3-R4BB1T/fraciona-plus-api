@@ -54,7 +54,7 @@ routes.put('/update', async (req: Request, res: Response) => {
 });
 
 // Rota para buscar estatísticas do usário pelo ID
-routes.get('/', async (req: Request, res: Response) => {
+routes.get('/user', async (req: Request, res: Response) => {
     try {
         const userId = req['user'].uid;
         const userStatistics = await userStatisticsModel.findOne({ userId });

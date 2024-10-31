@@ -32,53 +32,20 @@ const routes = Router();
 //     res.json(result);
 // });
 
-// // retorna todas as conquistas, se foram ganhas ou não
-// routes.get('/', async (req: Request, res: Response) => {
-//     try {
-//         const userId = req['user'].uid;
-
-//         const userAchievements = await userAchievementsModel.find({ userId: userId });
-//         const userAchievementIds = new Set(userAchievements.map(ach => ach.achievementId.toString()));
-
-//         const allAchievements = await achievementsModel.find();
-
-//         const achievementsWithDisabled = allAchievements.map(globalAchievement => {
-//             const achievementObj = {
-//                 ...globalAchievement.toObject(),
-//                 disabled: !userAchievementIds.has(globalAchievement._id.toString())
-//             };
-//             return achievementObj;
-//         });
-
-//         res.json(achievementsWithDisabled);
-//     } catch (error) {
-//         console.error('Erro ao buscar conquistas do usuário:', error);
-//         res.status(500).json({ error: 'Erro ao buscar conquistas do usuário' });
-//     }
-// });
-
-// Rota para buscar conquistas 
-// Diz se o usuario obteve ou não a conquista
+// Rota para buscar conquistas, retorna se o usuario já obteve a conquista ou não 
 routes.get('/', async (req: Request, res: Response) => {
     try {
         const userId = req['user'].uid;
 
-        // Busca as conquistas do usuário
         const userAchievements = await userAchievementsModel.find({ userId: userId });
-
-        // Cria um mapa onde a chave é o achievementId e o valor é o createdAt
         const userAchievementMap = new Map(
             userAchievements.map(ach => [ach.achievementId.toString(), ach.createdAt])
         );
 
-        // Busca todas as conquistas
         const allAchievements = await achievementsModel.find();
 
         const achievementsWithDetails = allAchievements.map(globalAchievement => {
-            // Obtenha a data de criação se o usuário possuir a conquista
             const createdAt = userAchievementMap.get(globalAchievement._id.toString());
-
-            // Cria o objeto de conquista
             const achievementObj = {
                 ...globalAchievement.toObject(),
                 disabled: !createdAt, // Se createdAt for undefined, o achievement está desabilitado
@@ -99,16 +66,11 @@ routes.get('/user', async (req: Request, res: Response) => {
     try {
         const userId = req['user'].uid;
 
-        // Busca as conquistas do usuário
         const userAchievements = await userAchievementsModel.find({ userId: userId });
-
-        // Cria um conjunto de achievementIds que o usuário conquistou
         const userAchievementIds = new Set(userAchievements.map(ach => ach.achievementId.toString()));
 
-        // Busca todas as conquistas disponíveis
         const allAchievements = await achievementsModel.find();
 
-        // Filtra as conquistas do usuário para incluir apenas o título e a imagem
         const achievementsWithDetails = allAchievements
             .filter(globalAchievement => userAchievementIds.has(globalAchievement._id.toString()))
             .map(globalAchievement => ({
