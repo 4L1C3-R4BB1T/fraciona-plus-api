@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import achievementsModel from "../models/achievements.model";
-import userAchievementsModel from '../models/user_achievements.model';
+import userAchievementsModel from '../models/user_achievement.model';
 
 const routes = Router();
 

@@ -4,11 +4,12 @@ import express, { NextFunction, Request, Response } from 'express';
 import firebaseAdmin from 'firebase-admin';
 import mongoose from 'mongoose';
 import * as path from 'node:path';
-import { populateDB } from './utils/populate';
 import registry from './core/provider-registry';
 import firebaseAuthMiddleware from './infra/middlewares/firebase-auth.middleware';
 import achievementRoutes from './infra/routes/achievements.route';
+import statisticsRoutes from './infra/routes/statistics.route';
 import UserService from './infra/services/user.service';
+import { populateDB } from './utils/populate';
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ async function bootstrap() {
     
     // Registrar rotas
     app.use('/achievements', achievementRoutes);
+    app.use('/statistics', statisticsRoutes);
     
     // Global Exception Handler
     app.use((error: any, req: Request, res: Response, next: NextFunction) => {

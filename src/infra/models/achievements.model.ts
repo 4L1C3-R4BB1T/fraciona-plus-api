@@ -5,6 +5,6 @@ const schema = new Schema({
     description: String,
     image: String,
     color: String
-}, { timestamps: true, });
+}, { timestamps: true });
 
 export default mongoose.model('achievements', schema);

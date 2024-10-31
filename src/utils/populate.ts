@@ -1,7 +1,7 @@
 import { populateAchievements } from "./achievements";
 import { populateUserAchievements } from "./userAchievements";
 
-export function populateDB() {
-    populateAchievements();
-    populateUserAchievements();
+export async function populateDB() {
+    await populateAchievements();
+    await populateUserAchievements();
 }

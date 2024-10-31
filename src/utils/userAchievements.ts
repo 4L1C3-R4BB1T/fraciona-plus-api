@@ -1,5 +1,5 @@
 import achievementsModel from "../infra/models/achievements.model";
-import userAchievementsModel from '../infra/models/user_achievements.model';
+import userAchievementsModel from '../infra/models/user_achievement.model';
 
 export async function populateUserAchievements() {
     try {
