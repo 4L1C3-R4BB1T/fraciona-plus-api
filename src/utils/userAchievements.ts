@@ -8,7 +8,7 @@ export async function populateUserAchievements() {
             const achievement = await achievementsModel.findOne({ title: "Grande Amigo" });
             if (achievement) {
                 await userAchievementsModel.create({
-                    userId: "xVcG3vhNs1azaNxgvkflxM7lHW32",
+                    userId: "JOw5qhvo36Mik4zzTNysNjKBlVh1",
                     achievementId: achievement._id
                 });
                 console.log("Dados populados com sucesso!");
