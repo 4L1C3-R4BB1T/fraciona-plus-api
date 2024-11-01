@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon -e ts,js ./src/app.ts"
+    "start": "npx nodemon -e ts,js ./src/app.ts",
+    "build": "tsc",
+    "start:prod": "node dist/app.js"
   },
   "keywords": [],
   "author": "",
