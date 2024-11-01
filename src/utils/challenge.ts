@@ -8,7 +8,6 @@ const challenges = [
     {
         title: "Quebra-Fração",
         difficulty: 3,
-        exp: 30,
         image: `${baseURL}/challenges/puzzle.png`,
         questions: [
             {
@@ -92,7 +91,6 @@ const challenges = [
     {
         title: 'Primeiros Passos',
         difficulty: 1,
-        exp: 10,
         image: `${baseURL}/challenges/baby.png`,
         questions: [
             {
@@ -124,7 +122,6 @@ const challenges = [
     {
         title: 'Mestre das Frações',
         difficulty: 2,
-        exp: 40,
         image: `${baseURL}/challenges/wizard.png`,
         questions: [
             {
@@ -154,7 +151,6 @@ const challenges = [
     {
         title: 'Calculadora Humana',
         difficulty: 2,
-        exp: 45,
         image: `${baseURL}/challenges/calculator.png`,
         questions: [
             {
@@ -184,7 +180,6 @@ const challenges = [
     {
         title: 'A Grande Fração',
         difficulty: 3,
-        exp: 35,
         image: `${baseURL}/challenges/number.png`,
         questions: [
             {
@@ -214,7 +209,6 @@ const challenges = [
     {
         title: 'Conhecimento Sólido',
         difficulty: 1,
-        exp: 10,
         image: `${baseURL}/challenges/stone.png`,
         questions: [
             {

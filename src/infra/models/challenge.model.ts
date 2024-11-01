@@ -16,7 +16,6 @@ const questionSchema = new Schema({
 const schema = new Schema({
     title: String,
     difficulty: Number,
-    exp: Number,
     image: String,
     questions: [questionSchema]
 });

@@ -26,8 +26,8 @@ routes.post('/create', async (req: Request, res: Response) => {
 // Rota para atualizar estatísticas do usuário
 routes.put('/update', async (req: Request, res: Response) => {
     try {
-        const userId = req['user'].uid;
-        const { correctAnswers, wrongAnswers, qttAchievements, total_exp } = req.body;
+        const userId = req['user'].uid;        
+        const { correctAnswers, wrongAnswers, qttAchievements, totalExp } = req.body;
 
         const updatedStatistics = await userStatisticsModel.findOneAndUpdate(
             { userId: userId },
@@ -36,7 +36,7 @@ routes.put('/update', async (req: Request, res: Response) => {
                     correctAnswers: correctAnswers || 0,
                     wrongAnswers: wrongAnswers || 0,
                     qttAchievements: qttAchievements || 0,
-                    totalExp: total_exp || 0,
+                    totalExp: totalExp || 0,
                 }
             },
             { new: true }

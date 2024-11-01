@@ -34,7 +34,8 @@ async function bootstrap() {
     registry.register(UserService.name, new UserService());
 
     // Middlewares
-    app.use(cors());
+    app.use(cors());    
+    app.use(express.json());
 
     app.use('/public', express.static(path.resolve('public')));
     
@@ -56,7 +57,7 @@ async function bootstrap() {
             });
         } 
         res.json({
-            error: 'sorry, an error was occurred but we are work for repair it',
+            error: 'Sorry, an error was occurred but we are work for repair it.',
         });
     }); 
     
