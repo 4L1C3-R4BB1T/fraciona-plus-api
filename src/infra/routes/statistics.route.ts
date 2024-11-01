@@ -26,7 +26,7 @@ routes.post('/create', async (req: Request, res: Response) => {
 // Rota para atualizar estatísticas do usuário
 routes.put('/update', async (req: Request, res: Response) => {
     try {
-        const userId = req['user'].uid;        
+        const userId = req['user'].uid;
         const { correctAnswers, wrongAnswers, qttAchievements, totalExp } = req.body;
 
         const updatedStatistics = await userStatisticsModel.findOneAndUpdate(
