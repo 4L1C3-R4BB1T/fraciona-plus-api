@@ -22,8 +22,14 @@ mongoose.connect(process.env.MONGODB_URL)
 
 async function bootstrap() {
     // Inicializando o Firebase 
+    // firebaseAdmin.initializeApp({
+    //     credential: firebaseAdmin.credential.cert(process.env.FIREBASE_SECRET_KEY!),
+    // });
+    
+    const serviceAccount = JSON.parse(process.env.FIREBASE_SECRET_KEY!);
+
     firebaseAdmin.initializeApp({
-        credential: firebaseAdmin.credential.cert(process.env.FIREBASE_SECRET_KEY!),
+        credential: firebaseAdmin.credential.cert(serviceAccount),
     });
 
     const port = process.env.PORT ?? '3000';
