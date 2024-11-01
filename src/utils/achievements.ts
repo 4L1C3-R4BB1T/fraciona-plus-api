@@ -2,7 +2,9 @@ import achievementsModel from "../infra/models/achievements.model";
 
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 3000;
-const baseURL = `http://${host}:${port}/public`;
+const hostname = process.env.HOSTNAME || `${host}:${port}`;
+
+const baseURL = `${hostname}/public`;
 
 const achievements = [
     {
