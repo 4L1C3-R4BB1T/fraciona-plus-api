@@ -1,8 +1,7 @@
 import challengeModel from "../infra/models/challenge.model";
 
-const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 3000;
-const hostname = process.env.HOSTNAME || `${host}:${port}`;
+const hostname = process.env.HOSTNAME || `http://localhost:${port}`;
 
 const baseURL = `${hostname}/public`;
 
