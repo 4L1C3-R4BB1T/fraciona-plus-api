@@ -1,12 +1,13 @@
 import { Request, Response, Router } from "express";
 import userAchievementsModel from '../models/user_achievement.model';
 import userStatisticsModel from "../models/user_statistics.model";
+import { AuthUtil } from "../../utils/auth-util";
 
 const routes = Router();
 
 routes.delete('/delete', async (req: Request, res: Response) => {
     try {
-        const userId = req['user'].uid;  
+        const userId = AuthUtil.getLoggedUser(req, 'uid');
 
         await userStatisticsModel.deleteOne({ userId });
         await userAchievementsModel.deleteMany({ userId });

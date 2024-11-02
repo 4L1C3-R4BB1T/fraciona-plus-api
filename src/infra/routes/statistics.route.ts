@@ -1,12 +1,14 @@
 import { Request, Response, Router } from "express";
 import userStatisticsModel from "../models/user_statistics.model";
+import { AuthUtil } from "../../utils/auth-util";
 
 const routes = Router();
+
 
 // Rota para criar estatísticas do usuário ao criar uma conta
 routes.post('/create', async (req: Request, res: Response) => {
     try {
-        const userId = req['user'].uid;
+        const userId = AuthUtil.getLoggedUser(req, 'uid');
 
         const userStatistics = await userStatisticsModel.create({
             userId: userId,
@@ -26,7 +28,7 @@ routes.post('/create', async (req: Request, res: Response) => {
 // Rota para atualizar estatísticas do usuário
 routes.put('/update', async (req: Request, res: Response) => {
     try {
-        const userId = req['user'].uid;
+        const userId = AuthUtil.getLoggedUser(req, 'uid');
         const { correctAnswers, wrongAnswers, qttAchievements, totalExp } = req.body;
 
         const updatedStatistics = await userStatisticsModel.findOneAndUpdate(
@@ -56,7 +58,7 @@ routes.put('/update', async (req: Request, res: Response) => {
 // Rota para buscar estatísticas do usário pelo ID
 routes.get('/user', async (req: Request, res: Response) => {
     try {
-        const userId = req['user'].uid;
+        const userId = AuthUtil.getLoggedUser(req, 'uid');
         const userStatistics = await userStatisticsModel.findOne({ userId });
 
         if (!userStatistics) {

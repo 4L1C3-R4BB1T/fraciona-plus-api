@@ -4,14 +4,12 @@ import express, { NextFunction, Request, Response } from 'express';
 import firebaseAdmin from 'firebase-admin';
 import mongoose from 'mongoose';
 import * as path from 'node:path';
-import registry from './core/provider-registry';
 import firebaseAuthMiddleware from './infra/middlewares/firebase-auth.middleware';
 import achievementRoutes from './infra/routes/achievements.route';
 import challengeRoutes from './infra/routes/challenge.route';
 import rankingRoutes from './infra/routes/ranking.route';
 import statisticsRoutes from './infra/routes/statistics.route';
 import userRoutes from './infra/routes/user.route';
-import UserService from './infra/services/user.service';
 import { populateDB } from './utils/populate';
 
 dotenv.config();
@@ -35,10 +33,7 @@ async function bootstrap() {
     const port = process.env.PORT ?? '3000';
 
     const app = express();
-
-    // Injeção de Dependência
-    registry.register(UserService.name, new UserService());
-
+    
     // Middlewares
     app.use(cors());
     app.use(express.json());

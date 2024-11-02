@@ -1,6 +1,8 @@
 import { Request, Response, Router } from "express";
+import { AuthUtil } from "../../utils/auth-util";
 import achievementsModel from "../models/achievements.model";
 import userAchievementsModel from '../models/user_achievement.model';
+import userStatisticsModel from '../models/user_statistics.model';
 
 const routes = Router();
 
@@ -31,6 +33,40 @@ const routes = Router();
 //     });
 //     res.json(result);
 // });
+
+routes.get('/check-achievements', async (req: Request, res: Response) => {
+    try {
+        const userId = AuthUtil.getLoggedUser(req, 'uid') as string;
+        const statistics = await userStatisticsModel.findOne({
+            userId,
+        });
+
+        if (!statistics) {
+            throw new Error('Statistic not found');
+        }  
+
+        const achievements = await achievementsModel.find(); 
+
+        // userId: String,
+        // correctAnswers: Number,
+        // wrongAnswers: Number,
+        // qttAchievements: Number,
+        // totalExp: Number
+
+        // Pesquisar pelo tipo 
+
+        for (const { type, goal } of achievements) {
+            // Tipo isso, se for true o usuario adquire a conquista
+            if (type === 'no-wrong' && statistics.wrongAnswers >= goal) {
+
+            }
+        }
+
+        achievementsModel.find();
+    } catch (err) {
+        
+    }
+});
 
 // Rota para buscar conquistas, retorna se o usuario já obteve a conquista ou não 
 routes.get('/', async (req: Request, res: Response) => {

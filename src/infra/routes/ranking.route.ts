@@ -1,13 +1,14 @@
 import { Request, Response, Router } from "express";
 import firebaseAdmin from 'firebase-admin';
 import userStatisticsModel from "../models/user_statistics.model";
+import { AuthUtil } from "../../utils/auth-util";
 
 const routes = Router();
 
 // Rota para retornar o ranqueamento de usuários
 routes.get('/', async (req: Request, res: Response) => {
     try {
-        const userId = req['user'].uid;         
+        const userId = AuthUtil.getLoggedUser(req, 'uid');        
                 
         const userStatistics = await userStatisticsModel.find()
             .sort({ totalExp: -1, createdAt: 1 }).limit(20);
@@ -33,7 +34,7 @@ routes.get('/', async (req: Request, res: Response) => {
 // Rota para retornar do ranking do usuário pelo ID
 routes.get('/user', async (req: Request, res: Response) => {
     try {
-        const userId = req['user'].uid;          
+        const userId = AuthUtil.getLoggedUser(req, 'uid') as string;      
         const userRecord = await firebaseAdmin.auth().getUser(userId);
         
         const allStatistics = await userStatisticsModel.find().sort({ totalExp: -1 });
