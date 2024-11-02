@@ -37,12 +37,10 @@ const routes = Router();
 routes.get('/check-achievements', async (req: Request, res: Response) => {
     try {
         const userId = AuthUtil.getLoggedUser(req, 'uid') as string;
-        const statistics = await userStatisticsModel.findOne({
-            userId,
-        });
+        const userStatistics = await userStatisticsModel.findOne({ userId });
 
-        if (!statistics) {
-            throw new Error('Statistic not found');
+        if (!userStatistics) {
+            return res.status(404).json({ message: 'Estatísticas não encontradas para o usuário.' });
         }  
 
         const achievements = await achievementsModel.find(); 
@@ -57,14 +55,16 @@ routes.get('/check-achievements', async (req: Request, res: Response) => {
 
         for (const { type, goal } of achievements) {
             // Tipo isso, se for true o usuario adquire a conquista
-            if (type === 'no-wrong' && statistics.wrongAnswers >= goal) {
+            if (type === 'no-wrong' && userStatistics.wrongAnswers >= goal) {
 
             }
         }
 
         achievementsModel.find();
-    } catch (err) {
         
+    } catch (error) {
+        console.error('Erro ao verificar conquistas:', error);
+        res.status(500).json({ error: 'Erro ao verificar conquistas.' });
     }
 });
 
