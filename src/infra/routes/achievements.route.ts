@@ -63,7 +63,6 @@ routes.get('/check-achievements', async (req: Request, res: Response) => {
         achievementsModel.find();
         
     } catch (error) {
-        console.error('Erro ao verificar conquistas:', error);
         res.status(500).json({ error: 'Erro ao verificar conquistas.' });
     }
 });
@@ -92,7 +91,6 @@ routes.get('/', async (req: Request, res: Response) => {
 
         res.json(achievementsWithDetails);
     } catch (error) {
-        console.error('Erro ao buscar conquistas do usuário:', error);
         res.status(500).json({ error: 'Erro ao buscar conquistas do usuário' });
     }
 });
@@ -116,7 +114,6 @@ routes.get('/user', async (req: Request, res: Response) => {
 
         res.json(achievementsWithDetails);
     } catch (error) {
-        console.error('Erro ao buscar conquistas do usuário:', error);
         res.status(500).json({ error: 'Erro ao buscar conquistas do usuário' });
     }
 });

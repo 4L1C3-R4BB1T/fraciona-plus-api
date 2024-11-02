@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
-import userStatisticsModel from "../models/user_statistics.model";
 import { AuthUtil } from "../../utils/auth-util";
+import userStatisticsModel from "../models/user_statistics.model";
 
 const routes = Router();
 
@@ -20,7 +20,6 @@ routes.post('/create', async (req: Request, res: Response) => {
 
         res.status(201).json(userStatistics);
     } catch (error) {
-        console.error('Erro ao criar conta do usuário e salvar estatísticas:', error);
         res.status(500).json({ error: 'Erro ao criar conta do usuário e salvar estatísticas.' });
     }
 });
@@ -50,7 +49,6 @@ routes.put('/update', async (req: Request, res: Response) => {
 
         res.json(updatedStatistics);
     } catch (error) {
-        console.error('Erro ao atualizar estatísticas do usuário:', error);
         res.status(500).json({ error: 'Erro ao atualizar estatísticas do usuário.' });
     }
 });
@@ -67,7 +65,6 @@ routes.get('/user', async (req: Request, res: Response) => {
 
         res.json(userStatistics);
     } catch (error) {
-        console.error('Erro ao buscar estatísticas do usuário:', error);
         res.status(500).json({ error: 'Erro ao buscar estatísticas do usuário.' });
     }
 });

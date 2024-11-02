@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import firebaseAdmin from 'firebase-admin';
-import userStatisticsModel from "../models/user_statistics.model";
 import { AuthUtil } from "../../utils/auth-util";
+import userStatisticsModel from "../models/user_statistics.model";
 
 const routes = Router();
 
@@ -26,7 +26,6 @@ routes.get('/', async (req: Request, res: Response) => {
 
         res.json(response);
     } catch (error) {
-        console.error('Erro ao buscar estatísticas do usuário:', error);
         res.status(500).json({ error: 'Erro ao buscar estatísticas do usuário' });
     }
 });
@@ -52,7 +51,6 @@ routes.get('/user', async (req: Request, res: Response) => {
             position: userPosition + 1
         });
     } catch (error) {
-        console.error('Erro ao buscar estatísticas do usuário:', error);
         res.status(500).json({ error: 'Erro ao buscar estatísticas do usuário' });
     }
 });

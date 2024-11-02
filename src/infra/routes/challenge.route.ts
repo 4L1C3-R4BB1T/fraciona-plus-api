@@ -1,5 +1,4 @@
 import { Request, Response, Router } from "express";
-
 import challengeModel from "../models/challenge.model";
 
 const routes = Router();
@@ -16,7 +15,6 @@ routes.get('/', async (req: Request, res: Response) => {
 
         res.status(200).json(challengesWithExp);
     } catch (error) {
-        console.error("Erro ao obter desafios:", error);
         res.status(500).json({ message: "Erro ao obter desafios" });
     }
 });
@@ -32,7 +30,6 @@ routes.get('/:id', async (req: Request, res: Response) => {
         }
         res.status(200).json(challenge);
     } catch (error) {
-        console.error("Erro ao obter desafio:", error);
         res.status(500).json({ message: "Erro ao obter desafio" });
     }
 });
@@ -50,7 +47,6 @@ routes.get('/difficulty/:difficulty', async (req: Request, res: Response) => {
         
         res.status(200).json(challengesWithExp);
     } catch (error) {
-        console.error("Erro ao obter desafios:", error);
         res.status(500).json({ message: "Erro ao obter desafios" });
     }
 });
