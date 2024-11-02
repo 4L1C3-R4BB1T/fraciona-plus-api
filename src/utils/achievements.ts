@@ -24,7 +24,7 @@ const achievements: Array<Achievement> = [
     },
     {
         title: 'Genial',
-        description: 'Complete uma atividade sem erros',
+        description: 'Complete uma atividade sem erro',
         image: `${baseURL}/anchievements/brain.png`,
         color: '#00BFFF',
         type: 'no-error', 
@@ -67,7 +67,7 @@ const achievements: Array<Achievement> = [
         description: 'Complete 100 atividades sem erros',
         image: `${baseURL}/anchievements/party.png`,
         color: '#8A2BE2',
-        type: 'learning',
+        type: 'no-error',
         goal: 100,
     },
     {

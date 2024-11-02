@@ -14,6 +14,7 @@ routes.post('/create', async (req: Request, res: Response) => {
             userId: userId,
             correctAnswers: 0,
             wrongAnswers: 0,
+            challengesCompleted: 0,
             qttAchievements: 0,
             totalExp: 0
         });
@@ -28,7 +29,7 @@ routes.post('/create', async (req: Request, res: Response) => {
 routes.put('/update', async (req: Request, res: Response) => {
     try {
         const userId = AuthUtil.getLoggedUser(req, 'uid');
-        const { correctAnswers, wrongAnswers, qttAchievements, totalExp } = req.body;
+        const { correctAnswers, wrongAnswers, challengesCompleted, qttAchievements, totalExp } = req.body;
 
         const updatedStatistics = await userStatisticsModel.findOneAndUpdate(
             { userId: userId },
@@ -36,6 +37,7 @@ routes.put('/update', async (req: Request, res: Response) => {
                 $inc: {
                     correctAnswers: correctAnswers || 0,
                     wrongAnswers: wrongAnswers || 0,
+                    challengesCompleted: challengesCompleted || 0,
                     qttAchievements: qttAchievements || 0,
                     totalExp: totalExp || 0,
                 }

@@ -4,6 +4,7 @@ const schema = new Schema({
     userId: String,
     correctAnswers: Number,
     wrongAnswers: Number,
+    challengesCompleted: Number,
     qttAchievements: Number,
     totalExp: Number
 }, { timestamps: true });

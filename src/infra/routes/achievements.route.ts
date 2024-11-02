@@ -6,40 +6,6 @@ import userStatisticsModel from '../models/user_statistics.model';
 
 const routes = Router();
 
-// Rota para verificar se o usuário atingiu as conquistas
-routes.get('/check-achievements', async (req: Request, res: Response) => {
-    try {
-        const userId = AuthUtil.getLoggedUser(req, 'uid') as string;
-        const userStatistics = await userStatisticsModel.findOne({ userId });
-
-        if (!userStatistics) {
-            return res.status(404).json({ message: 'Estatísticas não encontradas para o usuário.' });
-        }  
-
-        const achievements = await achievementsModel.find(); 
-
-        // userId: String,
-        // correctAnswers: Number,
-        // wrongAnswers: Number,
-        // qttAchievements: Number,
-        // totalExp: Number
-
-        // Pesquisar pelo tipo 
-
-        for (const { type, goal } of achievements) {
-            // Tipo isso, se for true o usuario adquire a conquista
-            if (type === 'no-wrong' && userStatistics.wrongAnswers >= goal) {
-                
-            }            
-        }
-
-        // achievementsModel.find();
-        
-    } catch (error) {
-        res.status(500).json({ error: 'Erro ao verificar conquistas.' });
-    }
-});
-
 // Rota para buscar conquistas, retorna se o usuario já obteve a conquista ou não 
 routes.get('/', async (req: Request, res: Response) => {
     try {
@@ -90,5 +56,46 @@ routes.get('/user', async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Erro ao buscar conquistas do usuário' });
     }
 });
+
+// Rota para verificar se o usuário atingiu as conquistas
+routes.get('/check-achievements', async (req: Request, res: Response) => {
+    try {
+        const userId = AuthUtil.getLoggedUser(req, 'uid') as string;
+        const userStatistics = await userStatisticsModel.findOne({ userId });
+
+        if (!userStatistics) {
+            return res.status(404).json({ message: 'Estatísticas não encontradas para o usuário.' });
+        }
+
+        const achievements = await achievementsModel.find();
+
+        const updateUserAchievements = async (type: string, goal: number, obj: any) => {
+            if (await userAchievementsModel.findOne(obj)) return; // Se já obtido, não faz nada
+            const conditions = {
+                'no-error': userStatistics.correctAnswers >= goal,
+                'learning': (userStatistics.wrongAnswers + userStatistics.correctAnswers) >= goal,
+                'challenge': userStatistics.challengesCompleted >= goal,
+                'trial-period': userStatistics.createdAt < new Date('2024-11-18')
+            };
+            if (conditions[type]) {
+                await userAchievementsModel.create(obj);
+                await userStatisticsModel.findOneAndUpdate({ userId }, { $inc: { qttAchievements: 1 } });
+            }
+        };
+
+        const promises = achievements.map(({ type, goal, _id }) => {
+            const obj = { userId, achievementId: _id };
+            return updateUserAchievements(type, goal, obj);
+        });
+
+        await Promise.all(promises);
+
+        res.status(200).json({ message: 'Conquistas verificadas com sucesso' });
+    } catch (error) {
+        console.error('Erro ao verificar conquistas:', error);
+        res.status(500).json({ error: 'Erro ao verificar conquistas' });
+    }
+});
+
 
 export default routes;
