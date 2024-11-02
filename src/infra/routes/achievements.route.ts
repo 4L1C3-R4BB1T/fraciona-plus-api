@@ -6,34 +6,7 @@ import userStatisticsModel from '../models/user_statistics.model';
 
 const routes = Router();
 
-// routes.get('/', async (req: Request, res: Response) => {
-//     console.log(req['user']) // ou seja toda requisiççao que for feita, eu tenho o id do usuario e como eu pego informaçoões dele?
-//     // simples, usando o firebaseadmin
-//     console.log(await firebaseAdmin.auth().getUser(req['user'].uid));
-//     // ou seja oq eu posso fazer pegar as conquistas de 1 usuario?
-//     // eu sei que sempre vai ter o usuario logado e eu vou ter o req['user']
-//     // pego o id do usuario e busco as conquistas dele.
-//     // q ta aonde?
-//     // achievement_user  e como seria isso?
-//     achievementUser.find({ userId: req['user']['id'] }); // aqui eu busco todas as coquistas do usuario, entendeu?s
-
-
-//     // vc pode usar um background job pra ficar verificando se o usuario atingiu determinado meta e ir setando as conquistas conforme
-//     // ele for cumprindo, background job roda sozinho, tipo um while true, agr se vira.;
-
-//     const achievements = await achievementsModel.find();
-//     const result = achievements.map(doc => {
-//         const obj = doc.toObject();
-//         return {
-//             id: obj._id,
-//             title: obj.title,
-//             content: obj.content,
-//             imageUrl: obj.imageUrl,
-//         }
-//     });
-//     res.json(result);
-// });
-
+// Rota para verificar se o usuário atingiu as conquistas
 routes.get('/check-achievements', async (req: Request, res: Response) => {
     try {
         const userId = AuthUtil.getLoggedUser(req, 'uid') as string;
@@ -56,11 +29,11 @@ routes.get('/check-achievements', async (req: Request, res: Response) => {
         for (const { type, goal } of achievements) {
             // Tipo isso, se for true o usuario adquire a conquista
             if (type === 'no-wrong' && userStatistics.wrongAnswers >= goal) {
-
-            }
+                
+            }            
         }
 
-        achievementsModel.find();
+        // achievementsModel.find();
         
     } catch (error) {
         res.status(500).json({ error: 'Erro ao verificar conquistas.' });

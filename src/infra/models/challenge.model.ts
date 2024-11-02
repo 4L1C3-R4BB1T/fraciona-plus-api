@@ -18,6 +18,6 @@ const schema = new Schema({
     difficulty: Number,
     image: String,
     questions: [questionSchema]
-});
+}, { timestamps: true });
 
 export default mongoose.model('challenges', schema);

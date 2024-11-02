@@ -8,7 +8,7 @@ export type Achievement = {
     image: string;
     color: string;
     type: 'trial-period' | 'consecutive-days' | 'ranking' | 'challenge' | 'learning' | 'no-wrong' | 'no-error';
-    goal: number; 
+    goal: number;
 }
 
 const schema = new Schema<Achievement>({
