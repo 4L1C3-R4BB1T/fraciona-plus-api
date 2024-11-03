@@ -98,10 +98,8 @@ routes.put('/update', async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Estatísticas não encontradas para o usuário.' });
         }
 
-        console.log(updatedStatistics);
         res.json(updatedStatistics);
     } catch (error) {
-        console.error(error);
         res.status(500).json({ error: 'Erro ao atualizar estatísticas do usuário.' });
     }
 });
