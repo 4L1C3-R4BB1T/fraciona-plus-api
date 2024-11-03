@@ -77,9 +77,9 @@ routes.put('/update', async (req: Request, res: Response) => {
             lastOffensiveDate = currentDate; // Atualiza a última data de ofensiva para a data atual
         }
         
-        console.log("lasOffensiveDay", lastOffensiveDate)
-        console.log("dayDifference", dayDifference)
-        console.log("offesiveUpdate", offensiveUpdate)
+        // console.log("lasOffensiveDay", lastOffensiveDate)
+        // console.log("dayDifference", dayDifference)
+        // console.log("offesiveUpdate", offensiveUpdate)
 
         const updatedStatistics = await userStatisticsModel.findOneAndUpdate(
             { userId: userId },

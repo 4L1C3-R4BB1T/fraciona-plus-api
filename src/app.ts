@@ -12,6 +12,7 @@ import sectionRoutes from './infra/routes/section.route';
 import statisticsRoutes from './infra/routes/statistics.route';
 import userRoutes from './infra/routes/user.route';
 import { populateDB } from './utils/populate';
+import compression from 'compression';
 
 dotenv.config();
 
@@ -29,6 +30,8 @@ async function bootstrap() {
     const port = process.env.PORT ?? '3000';
 
     const app = express();
+    
+    app.use(compression());
     
     // Middlewares
     app.use(cors());
