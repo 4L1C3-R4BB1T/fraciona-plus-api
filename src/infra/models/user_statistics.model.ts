@@ -6,7 +6,10 @@ const schema = new Schema({
     wrongAnswers: Number,
     challengesCompleted: Number,
     qttAchievements: Number,
-    totalExp: Number
+    totalExp: Number,
+    offensive: Number,
+    lastOffensiveDate: Date,
+    activities: [{ date: { type: Date } }]
 }, { timestamps: true });
 
 export default mongoose.model('user_statistics', schema);

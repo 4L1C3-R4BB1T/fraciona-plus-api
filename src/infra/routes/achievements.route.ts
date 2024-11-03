@@ -75,7 +75,8 @@ routes.get('/check-achievements', async (req: Request, res: Response) => {
                 'no-error': userStatistics.correctAnswers >= goal,
                 'learning': (userStatistics.wrongAnswers + userStatistics.correctAnswers) >= goal,
                 'challenge': userStatistics.challengesCompleted >= goal,
-                'trial-period': userStatistics.createdAt < new Date('2024-11-18')
+                'trial-period': userStatistics.createdAt < new Date('2024-11-18'),
+                'consecutive-days': userStatistics.offensive >= goal
             };
             if (conditions[type]) {
                 await userAchievementsModel.create(obj);
