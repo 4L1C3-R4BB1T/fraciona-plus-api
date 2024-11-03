@@ -1,1 +1,3 @@
-em construção
+## Sobre
+
+API para o Fraciona+.
