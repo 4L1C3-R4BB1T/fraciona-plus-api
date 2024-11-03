@@ -27,6 +27,7 @@ const unitSchema = new Schema({
 
 const schema = new Schema({
     id: Number,
+    userId: String,
     divider: String,
     units: [unitSchema]
 });

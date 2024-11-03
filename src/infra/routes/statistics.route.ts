@@ -58,7 +58,7 @@ routes.put('/update', async (req: Request, res: Response) => {
         }
 
         // Normaliza as datas
-        let lastOffensiveDate = normalizeDate(userStatistics.lastOffensiveDate);
+        let lastOffensiveDate = userStatistics.lastOffensiveDate ? normalizeDate(userStatistics.lastOffensiveDate) : null;
 
         // Calcula a diferença em dias
         const dayDifference = lastOffensiveDate ? Math.floor((currentDate.getTime() - lastOffensiveDate.getTime()) / (1000 * 3600 * 24)) : null;
@@ -76,6 +76,10 @@ routes.put('/update', async (req: Request, res: Response) => {
         if (offensiveUpdate > 1) {
             lastOffensiveDate = currentDate; // Atualiza a última data de ofensiva para a data atual
         }
+        
+        console.log("lasOffensiveDay", lastOffensiveDate)
+        console.log("dayDifference", dayDifference)
+        console.log("offesiveUpdate", offensiveUpdate)
 
         const updatedStatistics = await userStatisticsModel.findOneAndUpdate(
             { userId: userId },
