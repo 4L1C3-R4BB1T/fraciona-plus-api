@@ -8,6 +8,7 @@ import firebaseAuthMiddleware from './infra/middlewares/firebase-auth.middleware
 import achievementRoutes from './infra/routes/achievements.route';
 import challengeRoutes from './infra/routes/challenge.route';
 import rankingRoutes from './infra/routes/ranking.route';
+import sectionRoutes from './infra/routes/section.route';
 import statisticsRoutes from './infra/routes/statistics.route';
 import userRoutes from './infra/routes/user.route';
 import { populateDB } from './utils/populate';
@@ -44,6 +45,7 @@ async function bootstrap() {
     app.use('/ranking', rankingRoutes);
     app.use('/user', userRoutes);
     app.use('/challenges', challengeRoutes);
+    app.use('/sections', sectionRoutes);
     
     // Global Exception Handler
     app.use((error: any, req: Request, res: Response, next: NextFunction) => {
@@ -59,5 +61,5 @@ async function bootstrap() {
     
     populateDB();
 
-    app.listen(port, () => console.log(`Servidor aberto em http://localhost:${port}`));
+    app.listen(port, () => console.log(`Servidor aberto em ${process.env.HOSTNAME || 'http://localhost'}:${port}`));
 }
