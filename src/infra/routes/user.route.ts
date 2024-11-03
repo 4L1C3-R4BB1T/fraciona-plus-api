@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import { AuthUtil } from "../../utils/auth-util";
 import userAchievementsModel from '../models/user_achievement.model';
 import userStatisticsModel from "../models/user_statistics.model";
+import sectionModel from "../models/section.model";
 
 const routes = Router();
 
@@ -11,6 +12,7 @@ routes.delete('/', async (req: Request, res: Response) => {
         
         await userStatisticsModel.deleteOne({ userId });
         await userAchievementsModel.deleteMany({ userId });
+        await sectionModel.deleteOne({ userId });
         
         res.status(200).json({ message: "Usuário e dados relacionados deletados com sucesso." });
     } catch (error) {
