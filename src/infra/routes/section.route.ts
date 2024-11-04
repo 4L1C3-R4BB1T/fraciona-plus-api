@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
-import sectionModel from "../models/section.model";
 import { AuthUtil } from "../../utils/auth-util";
 import { section } from "../../utils/section";
+import sectionModel from "../models/section.model";
 
 const routes = Router();
 

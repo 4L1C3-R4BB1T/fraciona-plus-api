@@ -1,3 +1,4 @@
+import compression from 'compression';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
@@ -12,7 +13,6 @@ import sectionRoutes from './infra/routes/section.route';
 import statisticsRoutes from './infra/routes/statistics.route';
 import userRoutes from './infra/routes/user.route';
 import { populateDB } from './utils/populate';
-import compression from 'compression';
 
 dotenv.config();
 
