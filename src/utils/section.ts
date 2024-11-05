@@ -24,16 +24,10 @@ export let section =
                 {
                     id: 2,
                     item: 'activity',
-                    type: 'objective',
-                    content: 'Que fração representa 1 parte da pizza?',
-                    image: `${baseURL}/sections/pizza.png`,
-                    alternatives: [
-                        { id: 1, label: '1/1' },
-                        { id: 2, label: '1/8' },
-                        { id: 3, label: '1/2' },
-                        { id: 4, label: '1/4' }
-                    ],
-                    correctId: 2,
+                    type: 'dragdrop',
+                    content: 'Dividi uma pizza em 8 fatias. Comi 1/2 dela. Quantas fatias de pizza eu comi?',
+                    correctQtt: 4,
+                    label: "🍕",
                     description: 'Atividade 2',
                     disabled: true
                 },
@@ -94,15 +88,10 @@ export let section =
                 {
                     id: 7,
                     item: 'activity',
-                    type: 'objective',
-                    content: 'Qual fração representa metade de uma laranja?',
-                    alternatives: [
-                        { id: 1, label: '1/2' },
-                        { id: 2, label: '1/3' },
-                        { id: 3, label: '1/4' },
-                        { id: 4, label: '1/8' }
-                    ],
-                    correctId: 1,
+                    type: 'dragdrop',
+                    content: 'Tenho 12 maçãs. Comi 1/4 delas. Quantas maçãs eu comi?',
+                    correctQtt: 3,
+                    label: "🍎",
                     description: 'Atividade 7',
                     disabled: true
                 },

@@ -15,6 +15,8 @@ const trailItemSchema = new Schema({
     alternatives: [alternativeSchema],
     title: String,
     description: String,
+    correctQtt: Number,
+    label: String,
     disabled: Boolean,
     completed: Boolean
 });
