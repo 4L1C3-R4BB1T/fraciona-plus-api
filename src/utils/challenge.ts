@@ -285,15 +285,10 @@ const challenges = [
         image: `${baseURL}/challenges/number.png`,
         questions: [
             {
-                type: 'objective',
-                content: 'Qual fração representa 75%?',
-                alternatives: [
-                    { id: 1, label: '1/4' },
-                    { id: 2, label: '3/4' },
-                    { id: 3, label: '2/3' },
-                    { id: 4, label: '1/2' }
-                ],
-                correctId: 2
+                type: 'dragdrop',
+                content: 'Tenho 14 bananas. Dei 3/4 delas para meu amigo. Com quantas bananas fiquei?',
+                correctQtt: 4,
+                label: "🍌",
             },
             {
                 type: 'objective',
