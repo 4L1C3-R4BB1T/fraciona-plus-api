@@ -10,7 +10,9 @@ const questionSchema = new Schema({
     content: String,
     image: String,
     correctId: Number,
-    alternatives: [alternativeSchema]
+    alternatives: [alternativeSchema],
+    correctQtt: Number,
+    label: String
 });
 
 const schema = new Schema({
