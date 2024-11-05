@@ -286,7 +286,7 @@ const challenges = [
         questions: [
             {
                 type: 'dragdrop',
-                content: 'Tenho 14 bananas. Dei 3/4 delas para meu amigo. Com quantas bananas fiquei?',
+                content: 'Tenho 16 bananas. Dei 3/4 delas para meu amigo. Com quantas bananas fiquei?',
                 correctQtt: 4,
                 label: "🍌",
             },
