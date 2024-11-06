@@ -6,7 +6,7 @@ import userStatisticsModel from '../models/user_statistics.model';
 
 const routes = Router();
 
-// Rota para buscar conquistas, retorna se o usuario já obteve a conquista ou não 
+// Rota para buscar conquistas, retorna se o usuário já obteve a conquista ou não 
 routes.get('/', async (req: Request, res: Response) => {
     try {
         const userId = req['user'].uid;
@@ -28,11 +28,26 @@ routes.get('/', async (req: Request, res: Response) => {
             return achievementObj;
         });
 
-        res.json(achievementsWithDetails);
+        // Ordena os achievements: primeiro os que possuem 'obtainedAt' (mais recentes primeiro), depois os que não possuem
+        const sortedAchievements = achievementsWithDetails.sort((a, b) => {
+            // Se ambos têm ou não têm 'obtainedAt', não há diferença
+            if (a.obtainedAt && b.obtainedAt) {
+                const dateA = new Date(a.obtainedAt);
+                const dateB = new Date(b.obtainedAt);
+                return dateB.getTime() - dateA.getTime(); // Ordena da data mais recente para a mais antiga
+            }
+            // Se um tem 'obtainedAt' e o outro não, coloca o que tem na frente
+            if (a.obtainedAt && !b.obtainedAt) return -1;
+            if (!a.obtainedAt && b.obtainedAt) return 1;
+            return 0; // Se ambos não têm 'obtainedAt', a ordem é mantida
+        });
+
+        res.json(sortedAchievements);
     } catch (error) {
         res.status(500).json({ error: 'Erro ao buscar conquistas do usuário' });
     }
 });
+
 
 // Rota para buscar conquistas por ID do usuário
 routes.get('/user', async (req: Request, res: Response) => {
