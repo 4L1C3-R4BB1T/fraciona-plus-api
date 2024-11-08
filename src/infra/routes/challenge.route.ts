@@ -4,11 +4,9 @@ import challengeModel from "../models/challenge.model";
 const routes = Router();
 
 // Rota para obter todos os desafios
-routes.get('/', async (req: Request, res: Response) => {
-    const difficulty = req.query.difficulty;
-    const filter = difficulty !== '0' ? { difficulty } : {};    
+routes.get('/', async (req: Request, res: Response) => {  
     try {
-        const challenges = await challengeModel.find(filter);
+        const challenges = await challengeModel.find();
         const challengesWithExp = challenges.map((challenge) => ({
             ...challenge.toObject(),
             exp: (challenge.questions?.length || 0) * 5
