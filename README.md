@@ -1,3 +1,3 @@
-## Sobre
+## 🎓 Sobre
 
 API para o Fraciona+.
