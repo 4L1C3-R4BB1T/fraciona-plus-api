@@ -52,7 +52,7 @@ const challenges = [
                     { id: 1, label: "3/6" },
                     { id: 2, label: "1/6" },
                     { id: 3, label: "2/6" },
-                    { id: 4, label: "1/2" }
+                    { id: 4, label: "1/3" }
                 ],
                 correctId: 1
             },
@@ -62,7 +62,7 @@ const challenges = [
                 alternatives: [
                     { id: 1, label: "1/2" },
                     { id: 2, label: "3/4" },
-                    { id: 3, label: "4/8" },
+                    { id: 3, label: "1/8" },
                     { id: 4, label: "2/8" }
                 ],
                 correctId: 1
@@ -148,7 +148,7 @@ const challenges = [
                 alternatives: [
                     { id: 1, label: '2/6' },
                     { id: 2, label: '1/2' },
-                    { id: 3, label: '1/3' },
+                    { id: 3, label: '2/3' },
                     { id: 4, label: '1/6' }
                 ],
                 correctId: 1
@@ -178,7 +178,7 @@ const challenges = [
                     { id: 1, label: '2/8' },
                     { id: 2, label: '1/2' },
                     { id: 3, label: '4/4' },
-                    { id: 4, label: '2/4' }
+                    { id: 4, label: '1/4' }
                 ],
                 correctId: 2
             },
@@ -257,14 +257,14 @@ const challenges = [
             },
             {
                 type: 'objective',
-                content: 'Quanto é 3/4 menos 1/4?',
+                content: 'Quanto é 3/4 - 1/4?',
                 alternatives: [
-                    { id: 1, label: '1/2' },
+                    { id: 1, label: '3/2' },
                     { id: 2, label: '1/4' },
                     { id: 3, label: '3/4' },
                     { id: 4, label: '2/4' }
                 ],
-                correctId: 1
+                correctId: 4
             },
             {
                 type: 'objective',
@@ -319,7 +319,7 @@ const challenges = [
                     { id: 1, label: '3/4' },
                     { id: 2, label: '4/5' },
                     { id: 3, label: '2/3' },
-                    { id: 4, label: '6/8' }
+                    { id: 4, label: '6/9' }
                 ],
                 correctId: 1
             },
