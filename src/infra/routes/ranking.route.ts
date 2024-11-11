@@ -11,7 +11,7 @@ routes.get('/', async (req: Request, res: Response) => {
         const userId = AuthUtil.getLoggedUser(req, 'uid');        
                 
         const userStatistics = await userStatisticsModel.find()
-            .sort({ totalExp: -1, createdAt: 1 }).limit(20);
+            .sort({ totalExp: -1, createdAt: 1 }).limit(100);
 
         const response = await Promise.all(
             userStatistics.map(async (statistics) => {
